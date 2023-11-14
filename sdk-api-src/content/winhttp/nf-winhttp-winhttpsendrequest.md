@@ -301,7 +301,9 @@ The content length specified in the <i>dwTotalLength</i> parameter does not matc
 
 The <i>lpOptional</i> parameter must be <b>NULL</b> and the <i>dwOptionalLength</i> parameter must be zero when the Transfer-Encoding header is present.
 
-The Content-Length header cannot be present when the Transfer-Encoding header is present. 
+The Content-Length header cannot be present when the Transfer-Encoding header is present.
+
+An invalid header is present as per <a href="https://www.ietf.org/rfc/rfc2616.txt">RFC 2616</a>. (More in remarks)
 
 </td>
 </tr>
@@ -327,7 +329,6 @@ Even when WinHTTP is used in asynchronous mode, that is, when <b>WINHTTP_FLAG_AS
 An application must not delete or alter the buffer pointed to by <i>lpOptional</i> until the request handle is closed or the call to <a href="/windows/desktop/api/winhttp/nf-winhttp-winhttpreceiveresponse">WinHttpReceiveResponse</a> has completed, because an authentication challenge or redirect that required the optional data could be encountered in the course of receiving the response. If the operation must be aborted with <a href="/windows/desktop/api/winhttp/nf-winhttp-winhttpclosehandle">WinHttpCloseHandle</a>, the application must keep the buffer valid until it receives the callback  <b>WINHTTP_CALLBACK_STATUS_REQUEST_ERROR</b> with an <b>ERROR_WINHTTP_OPERATION_CANCELLED</b> error code.
 
 If  WinHTTP  is used synchronously, that is, when <b>WINHTP_FLAG_ASYNC</b> was not set in <a href="/windows/desktop/api/winhttp/nf-winhttp-winhttpopen">WinHttpOpen</a>, an application is not called with a completion status even if a callback function is registered. While in this mode, the application can call <a href="/windows/desktop/api/winhttp/nf-winhttp-winhttpreceiveresponse">WinHttpReceiveResponse</a> when <b>WinHttpSendRequest</b> returns.
-
 The 
 <b>WinHttpSendRequest</b> function sends the specified request to the HTTP server and allows the client to specify additional headers to send along with the request.
 
